@@ -1,0 +1,746 @@
+html {
+  overflow-y: auto; /* Forces the vertical scrollbar */
+}
+body {
+  background-color: rgb(192, 192, 192);
+}
+* {
+  margin: 0 auto;
+  user-select: none;
+}
+#TITLE {
+  padding-left: 50px;
+  padding-top: 10px;
+  height: 50px;
+  align-self: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 10px;
+  color: rgb(0, 0, 0);
+  letter-spacing: 2px;
+}
+#login-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  place-content: center;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+#login-form {
+  background-color: white;
+  height: 50vh;
+  width: 25vw;
+  border-radius: 1em;
+  padding: 25px;
+  animation: zoom 0.4s;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+#login-items {
+  animation: opacity 3s;
+}
+#prompt-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  place-content: center;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+#prompt-form {
+  background-color: rgb(158, 255, 174);
+  height: 25vh;
+  width: 25vw;
+  border-radius: 1em;
+  padding: 25px;
+  animation: zoom 0.4s;
+  z-index: 1000;
+}
+#prompt-items h1 {
+  color: red;
+}
+#prompt-items {
+  animation: opacity 2s;
+  font-weight: 900;
+  z-index: 1000;
+  font-size: 20px;
+}
+@keyframes zoom {
+  0% {
+    height: 0px;
+    width: 0px;
+  }
+  70% {
+    height: 20vh;
+    width: 20vw;
+  }
+  100% {
+    height: 2vh;
+    width: 25vw;
+  }
+}
+#close-login {
+  color: white;
+  width: 3vw;
+  height: 3vh;
+  border-radius: 5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin-right: 0;
+  transition: all 100ms;
+  box-shadow: black;
+  text-align: center;
+}
+#close-login:hover {
+  background-color: red;
+  color: black;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#add-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  place-content: center;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+@keyframes zoom {
+  0% {
+    height: 0vh;
+    width: 0vw;
+  }
+  100% {
+    height: 25vh;
+    width: 25vw;
+  }
+}
+#add-form {
+  background-color: white;
+  height: 70vh;
+  width: 30vw;
+  border-radius: 1em;
+  padding: 25px;
+  animation: zoom 0.4s;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+#add-login {
+  color: white;
+  width: 3vw;
+  height: 3vh;
+  border-radius: 5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin-right: 0;
+  transition: all 100ms;
+  box-shadow: black;
+  text-align: center;
+}
+#add-login:hover {
+  background-color: red;
+  color: black;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#add-items {
+  font-family: Arial, sans-serif;
+  animation: opacity 3s;
+  text-align: left;
+}
+/*START*/
+#form-header-label h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Label styling */
+#name-label,
+#username-label,
+#password-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Input field styling */
+#name,
+#username,
+#password {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+.label-design {
+  font-size: 20px;
+  color: #333;
+}
+/* Submit button styling */
+#adduserbutton {
+  display: flex;
+  align-self: center;
+  width: 200px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 500ms;
+}
+
+#adduserbutton:hover {
+  background-color: #002d5e; /* Darken button color on hover */
+  border-radius: 20px;
+}
+/*END*/
+#prod-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  place-content: center;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+#prod-form {
+  background-color: white;
+  height: 50vh;
+  width: 30vw;
+  border-radius: 1em;
+  padding: 25px;
+  animation: zoom 0.4s;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+/*START*/
+#input-prod {
+  width: 300px; /* Adjust as needed */
+  margin: 0 auto; /* Center the form on the page */
+  font-family: Arial, sans-serif;
+}
+
+#prod-name-group,
+#prod-price-group,
+#prod-submit-group {
+  margin-bottom: 15px; /* Add space between each group */
+  display: flex;
+  flex-direction: column; /* Align label and input vertically */
+}
+
+#prod-name-group label,
+#prod-price-group label {
+  margin-bottom: 10px; /* Add space below the label */
+  font-weight: bold; /* Make the label text bold */
+}
+
+#productName,
+#productPrice {
+  padding: 20px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Include padding in width calculation */
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: medium;
+}
+
+#addProductbutton {
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  text-align: center;
+}
+
+#addProductbutton:hover {
+  background-color: #0056b3; /* Darken the button color on hover */
+}
+
+/*END*/
+
+#prod-login {
+  color: white;
+  width: 3vw;
+  height: 3vh;
+  border-radius: 5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin-right: 0;
+  transition: all 500ms;
+  box-shadow: black;
+}
+#prod-login:hover {
+  background-color: red;
+  color: black;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#prod-items {
+  animation: opacity 3s;
+}
+
+#loginbutton {
+  margin-top: 20px;
+  width: 100px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: 900;
+  border: 1px solid;
+  border-radius: 10px;
+  transition: all 500ms;
+  cursor: pointer;
+}
+#loginbutton:hover {
+  background-color: rgb(0, 0, 255);
+  color: white;
+  border-radius: 20px;
+  width: 150px;
+}
+
+/* Container and table styling */
+#container-topbar {
+  position: fixed;
+  padding: 20px;
+  max-width: 100%;
+  width: 100%;
+  background-color: purple;
+  z-index: 1000;
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(90deg, white, black, white);
+}
+#container {
+  position: absolute;
+  margin-top: 70px;
+  margin-left: 250px;
+  padding: 20px;
+  padding-bottom: 50px;
+  max-width: 75%;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+#add-user {
+  margin-left: 80%;
+  width: 150px;
+  height: 40px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: rgb(90, 90, 255);
+  color: white;
+  transition: all, 0.4s;
+  cursor: pointer;
+}
+#add-user:hover {
+  background-color: white;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  color: rgb(90, 90, 255);
+}
+#table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+#table thead th {
+  background-color: #000000;
+  color: white;
+  padding: 12px;
+  border: 1px solid rgb(122, 122, 122);
+  text-align: center;
+}
+
+/* Body row styling */
+#table tbody {
+  background-color: rgb(255, 255, 255);
+}
+
+#table tbody tr:hover {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  color: black;
+}
+
+/* Data cell styling */
+#table td {
+  border: 1px solid gray;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* Action buttons styling */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  width: 40px;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+  background-color: #0b81ff;
+  color: #000000;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #ff5e6e;
+  color: #000000;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling the navigation bar */
+#navbar {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: auto; /* Full height of the screen */
+  width: 200px; /* Adjust width as needed */
+  background-color: #000000;
+  display: flex;
+  flex-direction: column; /* Vertical layout for links */
+  align-items: center;
+  box-shadow: 2px 0 5px rgba(255, 255, 255, 0.1);
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+  border-radius: 10px;
+  animation: zoom 500ms;
+}
+@keyframes zoom {
+  0% {
+    height: 0px;
+    width: 0px;
+  }
+  100% {
+    height: auto; /* Full height of the screen */
+    width: 200px;
+  }
+}
+/* General styling for the menu */
+.nav-menu {
+  margin-top: 50px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%; /* Full width for links */
+}
+
+/* Style for each menu item */
+.nav-menu li {
+  width: 100%; /* Ensure links span full width */
+}
+
+/* General styling for menu links */
+.nav-menu a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  padding: 30px;
+  display: block; /* Makes the link fill the list item */
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Optional separator */
+  transition: background-color 0.3s ease;
+  animation: opacity 1s;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#logout {
+  transition: all 500ms;
+}
+#logout:hover {
+  background-color: red;
+  font-weight: bolder;
+}
+#login {
+  transition: all 500ms;
+}
+#login:hover {
+  background-color: rgb(96, 96, 253);
+  font-weight: bolder;
+}
+
+/* Hover effect for links */
+.nav-menu a:hover {
+  background-color: #383838;
+  color: white;
+  font-weight: bolder;
+}
+
+/* Active link styling */
+.nav-menu a.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Styling for the logout button */
+.nav-menu .logout a {
+  margin-top: auto; /* Push the logout link to the bottom */
+}
+#status-td {
+  width: 15px;
+}
+#status {
+  background-color: rgb(36, 206, 59);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 200;
+  color: rgb(255, 255, 255);
+  letter-spacing: 1px;
+}
+#calculator-container {
+  animation: opacity 1s;
+}
+#calculator-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#calculator-container input,
+#calculator-container select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: medium;
+}
+#calculator-container h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#calcost {
+  border: 1px solid;
+  margin-left: 65%;
+  width: 150px;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: rgb(0, 185, 56);
+  color: white;
+  transition: all, 0.4s;
+  cursor: pointer;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+#calcost:hover {
+  background-color: rgb(183, 255, 183);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  color: rgb(0, 185, 56);
+}
+#action {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#table-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  place-content: center;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+}
+
+#table-form {
+  margin-left: 20%;
+  background-color: white;
+  width: 70vw;
+  place-content: center;
+  border-radius: 1em;
+  padding: 25px;
+  animation: zoom 0.4s;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Allow items to push the height */
+}
+
+#table-items {
+  animation: opacity 4s;
+  font-weight: 900;
+  z-index: 1000;
+  font-size: 20px;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#showorder {
+  padding: 0;
+  background-color: rgb(247, 247, 247);
+}
+#showOrder {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-size: larger;
+  border: none;
+  background-color: rgb(247, 247, 247);
+  font-weight: bolder;
+  border-radius: 10px;
+  letter-spacing: 2px;
+  transition: all 500ms;
+}
+#showOrder:hover {
+  background-color: rgb(255, 255, 255);
+  color: #0b81ff;
+  cursor: pointer;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+#order-table {
+  font-family: Arial, sans-serif;
+}
+#order-table thead th {
+  background-color: #000000;
+  color: white;
+  padding: 12px;
+  border: 1px solid rgb(129, 129, 129);
+  text-align: center;
+}
+#order-table td {
+  border: 1px solid gray;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+#order-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  place-content: center;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+#order-form {
+  margin-top: 80px;
+  margin-left: 20%;
+  background-color: white;
+  height: 100vh;
+  width: 70vw;
+  border-radius: 1em;
+  padding: 25px;
+  animation: zoom 0.4s;
+}
+#order-login {
+  color: white;
+  width: 3vw;
+  height: 3vh;
+  border-radius: 5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  margin-right: 0;
+  transition: all 100ms;
+  box-shadow: black;
+  text-align: center;
+}
+#order-login:hover {
+  background-color: red;
+  color: black;
+}
+
+#order-items {
+  font-family: Arial, sans-serif;
+  animation: opacity 3s;
+  text-align: left;
+}
+#addOrder {
+  background-color: #0b81ff;
+  color: white;
+  transition: all 500ms;
+}
+#addOrder:hover {
+  background-color: #52a6ff;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+  border: none;
+}
