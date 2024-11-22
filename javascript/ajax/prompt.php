@@ -3,23 +3,20 @@
     $prompt = "";
     $prompt .= "
             <div id='prompt-container'>
-            <div id='prompt-form'>
-                <form action='POST' id='promptForm'>
-                    <div id='prompt-items'>
-                        <label for=''>
-                            <h1>
-                                <strong>
-                                    Notification
-                                </strong>
-                            </h1>
-                        </label>
-                        <br>
-                        <br>
-                        $msg
+                <div id='prompt-form'>
+                    <div id='prompt-header'>
+                        <h1>Notification</h1>
                     </div>
-                </form>
+                    <div id='prompt-body'>
+                        <p id='message'>$msg</p>
+                    </div>
+                    <div id='prompt-footer'>
+                        <button onclick='return closePrompt()' id='confirm-button'>OK</button>
+                    </div>
+                </div>
             </div>
-        </div>
+
+
     ";
     echo $prompt;
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 function nav() {
     ?>
     <nav id="navbar">

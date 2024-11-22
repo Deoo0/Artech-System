@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if not logged in
+    header("Location: ?");
+    exit();
+}
+?>
+
 <div id="prod-container">
     <div id="prod-form">
         <form action="POST" id="addForm">
@@ -17,7 +26,7 @@
                     </div>
                     <div id="prod-price-group">
                         <label for="productPrice">Price:</label>
-                        <input type="text" id="productPrice" placeholder="Pesos">
+                        <input type="number" id="productPrice" placeholder="Pesos">
                     </div>
                     <div id="prod-submit-group">
                         <input type="submit" id="addProductbutton" value="Submit" onclick="return submitProdBtn()">

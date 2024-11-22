@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if not logged in
+    header("Location: ?");
+    exit();
+}
+
+?>
+
 <div id="add-container">
     <div id="add-form">
         <form action="POST" id="addForm">

@@ -1,4 +1,12 @@
-<?php include('topbar.php') ?>
+<?php 
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if not logged in
+    header("Location: ?");
+    exit();
+}
+
+include('topbar.php') ?>
 <div id="container">
     <span>
         <h1 id="TITLE">ORDERS</h1>

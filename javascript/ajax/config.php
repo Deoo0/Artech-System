@@ -52,8 +52,10 @@
         }
     }
 
-    if (isset($_POST['deleteBtn'])){
-        $id = $conn->real_escape_string($_POST['deleteBtn']);
+    if (isset($_POST['updBtn'])){
+        $id = $conn->real_escape_string($_POST['updBtn']);
+        $upd_input = $conn->real_escape_string($_POST['upd_input']);
+        $upd_input = $conn->real_escape_string($_POST['upd_input']);
         $stmt = "DELETE FROM users WHERE id ='$id'";
         if(mysqli_query($conn,$stmt)){
             echo "Succefully Deleted User";
@@ -62,12 +64,11 @@
             echo "Error: " . mysqli_error($conn);
         }
     }
-
-    if(isset($_POST['deleteProd'])){
-        $id = $conn ->real_escape_string($_POST['deleteProd']);
-        $stmt = "DELETE FROM products WHERE id = '$id'";
+    if (isset($_POST['deleteBtn'])){
+        $id = $conn->real_escape_string($_POST['deleteBtn']);
+        $stmt = "DELETE FROM users WHERE id ='$id'";
         if(mysqli_query($conn,$stmt)){
-            echo "Successfully Deleted Product";
+            echo "Succefully Deleted User";
         }
         else{
             echo "Error: " . mysqli_error($conn);
@@ -104,8 +105,9 @@
         $totalCost = $conn -> real_escape_string($_POST['cost']);
         $deadline = $conn -> real_escape_string($_POST['deadline']);
         $orderDate = date("Y-m-d");
+        $status = $conn->real_escape_string($_POST['status']);
 
-        $stmt = ("INSERT INTO orderss (product_id,client_name,client_info,order_date,quantity,total_price,status,deadline) VALUES('$product','$clientName','$clientContact','$orderDate','$quantity','$totalCost',2,'$deadline')");
+        $stmt = ("INSERT INTO orders (product_id,client_name,client_info,order_date,quantity,total_price,status,deadline) VALUES('$product','$clientName','$clientContact','$orderDate','$quantity','$totalCost','$status','$deadline')");
 
         if(mysqli_query($conn,$stmt)){
             echo "Order Successfully Added";
@@ -113,6 +115,65 @@
         else{
             echo "Error: " . mysqli_error($conn);
         }
+    }
+    if(isset($_POST['deleteOrder'])){
+        $id = $conn -> real_escape_string($_POST['deleteOrder']);
+        $stmt = "DELETE FROM orders WHERE id = '$id'";
+        if(mysqli_query($conn,$stmt)){
+            echo "Successfully Deleted Order";
+        }
+        else{
+            echo "Error: " . mysqli_error($conn);
+        }
+    }
+    
+
+    
+    if(isset($_POST['deleteProd'])){
+        $id = $conn ->real_escape_string($_POST['deleteProd']);
+        $stmt = "DELETE FROM products WHERE id = '$id'";
+        if(mysqli_query($conn,$stmt)){
+            echo "Successfully Deleted Product";
+        }
+        else{
+            echo "Error: " . mysqli_error($conn);
+        }
+    }
+
+    if(isset($_POST['upBtn'])){
+
+        $id = $conn -> real_escape_string($_POST['productid']);
+        $name = $conn -> real_escape_string($_POST['upname']);
+        $price = $conn -> real_escape_string($_POST['upprice']);
+        $status = $conn -> real_escape_string($_POST['upstatus']);
+
+        mysqli_query($conn,"UPDATE products SET name = '$name' ,price = '$price' ,status = '$status' WHERE id = '$id'");
+        echo "Product Updated";
+    }
+
+    if(isset($_POST['upuserBtn'])){
+        $id = $conn -> real_escape_string($_POST['userID']);
+        $name = $conn -> real_escape_string($_POST['name']);
+        $username = $conn -> real_escape_string($_POST['usn']);
+        $password = $conn -> real_escape_string($_POST['pass']);
+        mysqli_query($conn,"UPDATE users SET name = '$name', username='$username', password='$password' WHERE id = '$id'");
+
+        echo "User Updated";
+    }
+
+
+    if(isset($_POST['uporderBtn'])){
+        $id = $conn -> real_escape_string($_POST['id']);
+        $name = $conn -> real_escape_string($_POST['name']);
+        $date = $conn -> real_escape_string($_POST['date']);
+        $quantity = $conn -> real_escape_string($_POST['quantity']);
+        $price = $conn -> real_escape_string($_POST['price']);
+        $deadline = $conn -> real_escape_string($_POST['deadline']);
+        $info = $conn -> real_escape_string($_POST['clientinfo']);
+        $status = $conn -> real_escape_string($_POST['status']);
+
+        mysqli_query($conn, "UPDATE orders SET client_name ='$name',client_info='$info', order_date='$date', quantity='$quantity', total_price='$price',deadline='$deadline', status= '$status' WHERE id = '$id' ");
+        echo ("Order Details Updated");
     }
 
 ?>

@@ -27,6 +27,7 @@ function table(data) {
 }
 function prompt(data) {
   var popup = document.getElementById("pop-up");
+  var notif = document.getElementById("notification");
   var formdata = new FormData();
 
   formdata.append("prompt", data);
@@ -36,6 +37,7 @@ function prompt(data) {
   })
     .then((response) => response.text())
     .then((data) => {
+      notif.innerHTML = "";
       popup.innerHTML = data;
     });
 }
@@ -126,9 +128,6 @@ function submitUserBtn() {
       .then((data) => {
         if (data.trim() === "User Successfully Added") {
           prompt(data);
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
         } else {
           prompt(data);
         }
@@ -139,6 +138,33 @@ function submitUserBtn() {
       });
   }
   return false;
+}
+
+function updateUser(id) {
+  var upbutton = document.getElementById("updatebutton");
+  var name = document.getElementById("name" + id);
+  var username = document.getElementById("usn" + id);
+  var password = document.getElementById("pass" + id);
+
+  var formdata = new FormData();
+  formdata.append("userID", id);
+  formdata.append("name", name.value);
+  formdata.append("usn", username.value);
+  formdata.append("pass", password.value);
+  formdata.append("upuserBtn", upbutton.value);
+
+  fetch("javascript/ajax/config.php", {
+    method: "POST",
+    body: formdata,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      prompt(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching order details:", error);
+      notif("An error occurred while fetching order details.");
+    });
 }
 
 function deleteUser(userId) {
@@ -154,9 +180,6 @@ function deleteUser(userId) {
     })
       .then((response) => response.text())
       .then((data) => {
-        setTimeout(function () {
-          window.location.reload();
-        }, 1500);
         prompt(data);
       })
       .catch((error) => {
@@ -165,6 +188,24 @@ function deleteUser(userId) {
       });
   }
 }
+function updatePriceUser(userId) {
+  var formdata = new FormData();
+  formdata.append("updateBtn", userId);
+
+  fetch("javascript/ajax/config.php", {
+    method: "POST",
+    body: formdata,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      prompt(data);
+    })
+    .catch((error) => {
+      console.error("Error", error);
+      notif("An error has occured while deleteing user");
+    });
+}
+
 function deleteProduct(id) {
   var confirmDelete = confirm("Are you sure you want to delete this product?");
 
@@ -178,9 +219,6 @@ function deleteProduct(id) {
     })
       .then((response) => response.text())
       .then((data) => {
-        setTimeout(function () {
-          window.location.reload();
-        }, 1500);
         prompt(data);
       })
       .catch((error) => {
@@ -225,9 +263,6 @@ function submitProdBtn() {
       .then((data) => {
         if (data.trim() == "Product Successfully Added") {
           prompt(data);
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
         } else {
           prompt(data);
         }
@@ -306,6 +341,7 @@ function submitOrder() {
   var totalCost = document.getElementById("total-cost");
   var deadline = document.getElementById("deadLine");
   var addorder = document.getElementById("addOrder");
+  var status = document.getElementById("status-select").value;
 
   // Check the form values in the console for debugging
   console.log(
@@ -325,7 +361,8 @@ function submitOrder() {
   formdata.append("quantity", quantity.value);
   formdata.append("cost", totalCost.value);
   formdata.append("deadline", deadline.value);
-  formdata.append("addOrder", addorder.value); // Append the value of the button
+  formdata.append("addOrder", addorder.value);
+  formdata.append("status", status);
 
   // Validate form fields before submission
   if (
@@ -334,7 +371,8 @@ function submitOrder() {
     clientContact.value === "" ||
     quantity.value === "" ||
     totalCost.value === "" ||
-    deadline.value === ""
+    deadline.value === "" ||
+    status === ""
   ) {
     notif("Field Empty");
     return false;
@@ -348,9 +386,6 @@ function submitOrder() {
       .then((data) => {
         if (data.trim() == "Order Successfully Added") {
           prompt(data);
-          setTimeout(function () {
-            window.location.reload();
-          }, 2000);
         } else {
           prompt("ERROR");
         }
@@ -361,4 +396,108 @@ function submitOrder() {
       });
   }
   return false; // Prevent the default form submission
+}
+
+function deleteOrder(orderId) {
+  var confirmMsg = confirm("Are you sure you want to delete this order?");
+
+  if (confirmMsg) {
+    var formdata = new FormData();
+    formdata.append("deleteOrder", orderId);
+
+    console.log(formdata);
+    console.log("Sending to:", "javascript/ajax/config.php");
+    fetch("javascript/ajax/config.php", {
+      method: "POST",
+      body: formdata,
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        if (data.trim() == "Successfully Deleted Order") {
+          prompt(data);
+        } else {
+          propmt("Error: " + data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
+        alert("An error has occurred catch");
+        window.location.href = "?";
+      });
+  }
+  return false;
+}
+
+function upProduct(id) {
+  var upBtn = document.getElementById("btn-update");
+  var product = document.getElementById("prodname" + id);
+  var price = document.getElementById("prodprice" + id);
+  var status = document.getElementById("status" + id);
+
+  var formdata = new FormData();
+  formdata.append("upBtn", upBtn.value);
+  formdata.append("productid", id);
+  formdata.append("upname", product.value);
+  formdata.append("upprice", price.value);
+  formdata.append("upstatus", status.value);
+
+  fetch("javascript/ajax/config.php", {
+    method: "POST",
+    body: formdata,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      if (data.trim() == "Product Updated") {
+        prompt(data);
+      } else {
+        alert(data);
+      }
+    })
+    .catch((error) => alert("error" + error.message()));
+  return false;
+}
+function closePrompt() {
+  setTimeout(function () {
+    window.location.reload();
+  });
+}
+
+function upOrder(id) {
+  var upBtn = document.getElementById("updateorder");
+  var orderdate = document.getElementById("orderdate" + id);
+  var ordername = document.getElementById("ordername" + id);
+  var quantity = document.getElementById("quantity" + id);
+  var totalprice = document.getElementById("price" + id);
+  var deadline = document.getElementById("deadline" + id);
+  var clientinfo = document.getElementById("orderinfo" + id);
+  var status = document.getElementById("stat" + id);
+
+  var formdata = new FormData();
+  formdata.append("uporderBtn", upBtn.value);
+  formdata.append("date", orderdate.value);
+  formdata.append("name", ordername.value);
+  formdata.append("quantity", quantity.value);
+  formdata.append("price", totalprice.value);
+  formdata.append("deadline", deadline.value);
+  formdata.append("clientinfo", clientinfo.value);
+  formdata.append("status", status.value);
+  formdata.append("id", id);
+
+  console.log("Sending data to config");
+  console.log(ordername, orderdate, quantity, totalprice, deadline);
+  fetch("javascript/ajax/config.php", {
+    method: "POST",
+    body: formdata,
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      if (data.trim() == "Order Details Updated") {
+        prompt(data);
+      } else {
+        prompt("ERROR");
+        showOrder(id);
+      }
+    })
+    .catch((error) => alert("error" + error.message()));
+  return false;
 }
