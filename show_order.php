@@ -1,7 +1,6 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    // Redirect to login page if not logged in
     header("Location: login.php");
     exit();
 }
@@ -11,7 +10,6 @@ include('javascript/ajax/config.php');
 if (isset($_POST['productId'])) {
   $productId = $conn->real_escape_string($_POST['productId']);
 
-  // Query to fetch order details and product name
   $status = array(
       1 => "Completed",
       2 => "In progress",
@@ -28,7 +26,8 @@ if (isset($_POST['productId'])) {
               o.quantity, 
               o.total_price, 
               o.status,
-              o.deadline
+              o.deadline,
+              o.reference_num
             FROM 
               orders o 
             JOIN 
@@ -42,7 +41,8 @@ if (isset($_POST['productId'])) {
   $id = $conn -> real_escape_string($_POST['order_id']);
   if ($result && $result->num_rows > 0) {
       echo "<table id='order-table' style='width:100%; text-align:left; border-collapse: collapse;'>";
-      echo "<thead>
+      echo "
+      <thead>
               <tr>
                   <th>Ref #</th>
                   <th>Order Date</th>
@@ -64,11 +64,11 @@ while ($row = $result->fetch_assoc()) {
   $id = $row['order_id'];
   $mainstat = $row['status'];
   switch ($row['status']) {
-      case 1: $status_color = 'background-color: #d4edda; color: #155724;'; break; // Green for Completed
-      case 2: $status_color = 'background-color: #d1ecf1; color: #0c5460;'; break; // Light blue for In progress
-      case 3: $status_color = 'background-color: #fff3cd; color: #856404;'; break; // Yellow for Pending
-      case 4: $status_color = 'background-color: #f8d7da; color: #721c24;'; break; // Red for Canceled
-      case 5: $status_color = 'background-color: #f5c6cb; color: #721c24;'; break; // Red for Overdue
+      case 1: $status_color = 'background-color: #d4edda; color: #155724;'; break; 
+      case 2: $status_color = 'background-color: #d1ecf1; color: #0c5460;'; break; 
+      case 3: $status_color = 'background-color: #fff3cd; color: #856404;'; break; 
+      case 4: $status_color = 'background-color: #f8d7da; color: #721c24;'; break; 
+      case 5: $status_color = 'background-color: #f5c6cb; color: #721c24;'; break; 
   }
 
 
@@ -124,7 +124,7 @@ while ($row = $result->fetch_assoc()) {
 
     
           <tr>
-            <td style='font-size:15px; '> {$row['order_id']}</td>
+            <td style='font-size:15px; '> {$row['reference_num']}</td>
             <td style='font-size:15px; padding:0; '><input  type='date' id= 'orderdate$id'value='{$row['order_date']}'></td>
             <td style='font-size:15px; padding:0; '><input type='text' id='ordername$id' value='{$row['client_name']}'></td>
             <td style='font-size:15px; padding:0; '><input type='text' id='orderinfo$id' value='{$row['client_info']}'></td>

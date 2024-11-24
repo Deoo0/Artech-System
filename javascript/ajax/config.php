@@ -106,8 +106,9 @@
         $deadline = $conn -> real_escape_string($_POST['deadline']);
         $orderDate = date("Y-m-d");
         $status = $conn->real_escape_string($_POST['status']);
+        $refnum = rand(100000, 999999);
 
-        $stmt = ("INSERT INTO orders (product_id,client_name,client_info,order_date,quantity,total_price,status,deadline) VALUES('$product','$clientName','$clientContact','$orderDate','$quantity','$totalCost','$status','$deadline')");
+        $stmt = ("INSERT INTO orders (product_id,reference_num,client_name,client_info,order_date,quantity,total_price,status,deadline) VALUES('$product','$refnum','$clientName','$clientContact','$orderDate','$quantity','$totalCost','$status','$deadline')");
 
         if(mysqli_query($conn,$stmt)){
             echo "Order Successfully Added";
